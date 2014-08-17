@@ -2,3 +2,4 @@ name: ${pom.build.finalName}
 main: com.merikmc.chat.MErikChat
 version: ${pom.version}
 description: ${pom.description}
+depend: [Vault]
