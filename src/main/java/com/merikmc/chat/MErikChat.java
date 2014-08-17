@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class MErikChat extends JavaPlugin implements Listener {
 
-    private String CHAT_FORMAT = "(PREFIX) (NAME) &8» &7(MESSAGE)";
+    private String CHAT_FORMAT = "(PREFIX)(NAME) &8» &7(MESSAGE)";
     private Chat chat;
 
     public void onEnable() {
@@ -42,11 +42,10 @@ public class MErikChat extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
-        String temp = ChatColor.translateAlternateColorCodes('&', CHAT_FORMAT);
-        temp.replaceFirst("(PREFIX)", chat.getPlayerPrefix(e.getPlayer()));
-        temp.replaceFirst("(NAME)", e.getPlayer().getName());
-        temp.replaceFirst("(MESSAGE)", e.getMessage());
-        e.setFormat(temp);
+        String temp = CHAT_FORMAT.replace("(PREFIX)", chat.getPlayerPrefix(e.getPlayer()));
+        temp = temp.replace("(NAME)", e.getPlayer().getName());
+        temp = temp.replace("(MESSAGE)", e.getMessage());
+        e.setFormat(ChatColor.translateAlternateColorCodes('&', temp));
     }
 
 }
